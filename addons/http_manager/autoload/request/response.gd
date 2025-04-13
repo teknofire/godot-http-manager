@@ -31,7 +31,8 @@ func get_content_type() -> String:
 func get_header(header_name: String) -> String:
 	header_name += ":"
 	for h in headers:
-		if h.begins_with(header_name):
+		# Header field names are case-insensitive. RFC-7230 & RFC-7540
+		if h.to_lower().begins_with(header_name.to_lower()):
 			return h.substr(header_name.length()).strip_edges()
 	return ""
 
